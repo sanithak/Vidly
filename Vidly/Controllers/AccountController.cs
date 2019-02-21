@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Vidly.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Vidly.Controllers
 {
@@ -155,6 +156,14 @@ namespace Vidly.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //Temp code
+                 /*   var rolestore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    var rolemanager = new RoleManager<IdentityRole>(rolestore);
+                    await rolemanager.CreateAsync(new IdentityRole("CanManageMovies"));
+                    await UserManager.AddToRoleAsync(user.Id, "CanManageMovies");
+
+    */
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
